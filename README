@@ -1,2 +1,7 @@
 radSLIDE is a simple wordpress plugin for adding slideshows to websites. It uses jQuery Cycle to do the slideshow, and it includes options for a slideshow template and options to pass in to Cycle. It has a simple Ajax interface for adding, deleting, and updating slides.
 
+To install:
+- Put all files in wp-content/plugins/radslide/
+- In wordpress admin plugins page, activate radSLIDE plugin
+- In your theme where you want the slideshow to be displayed, put '<?php radslide(); ?>'
+
