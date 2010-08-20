@@ -55,7 +55,7 @@ function radslide() {
 function radslide_install() {
   global $wpdb;
 
-  // set the initial options
+	// set the initial options
   add_option('radslide_template',
 '<a href="[[LINK_URL]]"><img src="[[IMAGE_URL]]" alt="[[TITLE]]" /></a>
 <h3><a href="[[LINK_URL]]">[[TITLE]]</a></h3>
@@ -89,7 +89,7 @@ function radslide_install() {
 
 // uninstall
 function radslide_uninstall() {
-  global $wpdb;
+  /*global $wpdb;
 
   // delete the options
   delete_option('radslide_template');
@@ -100,7 +100,7 @@ function radslide_uninstall() {
 
   // delete the table
   $table_name = radslide_helper_db_table_name();
-  $wpdb->query("DROP TABLE IF EXISTS $table_name");
+	$wpdb->query("DROP TABLE IF EXISTS $table_name");*/
 }
 
 // create menu
@@ -142,7 +142,7 @@ function radslide_page_slideshow() {
           $("#radslide_table").html(data);
 
           // in the add new slide row, make input text disappear on focus
-          $("#radslide_add_row input").click(function(){
+          $("#radslide_add_row input[type='text']").click(function(){
             var id = $(this).attr('id');
             if(id != 'radslide_add' && id != 'radslide_update')
               $(this).val('');
@@ -239,7 +239,7 @@ function radslide_page_slideshow() {
 
   <h2>Manage Slideshow</h2>
   <div id="radslide_table">Loading slides...</div>
-  <pre id="test_data"></pre>
+	<pre id="test_data"></pre>
   <?php
 }
 function radslide_ajax_populate() {
@@ -247,9 +247,9 @@ function radslide_ajax_populate() {
   ?>
   <table>
     <tr>
+      <th>Image</th>
       <th>Title</th>
       <th>Description</th>
-      <th>Image URL</th>
       <th>Link URL</th>
       <th>Order</th>
       <th>Action</th>
@@ -260,13 +260,17 @@ function radslide_ajax_populate() {
     $rows = $wpdb->get_results("SELECT id,title,description,image_url,link_url,sort FROM $table_name ORDER BY sort,id");
     foreach($rows as $row) {
       ?>
-      <tr class="radslide_row" id="radslide_row-<?php echo($row->id); ?>">
+			<tr class="radslide_row" id="radslide_row-<?php echo($row->id); ?>">
+				<td style="text-align:center">
+					<input type="hidden" class="radslide_field" id="radslide_update-image_url-<?php echo($row->id); ?>" value="<?php echo(stripslashes($row->image_url)); ?>" />
+					<?php if(!empty($row->image_url)) { ?><img src="<?php echo(stripslashes($row->image_url)); ?>" height="50" id="radslide_update-image-<?php echo($row->id); ?>" /><?php } ?>
+				</td>
         <td><input type="text" class="radslide_field" id="radslide_update-title-<?php echo($row->id); ?>" value="<?php echo(stripslashes($row->title)); ?>" /></td>
         <td><input type="text" class="radslide_field" id="radslide_update-description-<?php echo($row->id); ?>" value="<?php echo(stripslashes($row->description)); ?>" /></td>
-        <td><input type="text" class="radslide_field" id="radslide_update-image_url-<?php echo($row->id); ?>" value="<?php echo(stripslashes($row->image_url)); ?>" /></td>
         <td><input type="text" class="radslide_field" id="radslide_update-link_url-<?php echo($row->id); ?>" value="<?php echo(stripslashes($row->link_url)); ?>" /></td>
         <td><input type="text" style="width:3em;" class="radslide_field" id="radslide_update-sort-<?php echo($row->id); ?>" value="<?php echo(stripslashes($row->sort)); ?>" /></td>
         <td style="text-align:center">
+					<input type="button" class="button-primary radslide_image_picker" id="radslide_image_picker-<?php echo($row->id); ?>" value="Choose Image" />
           <input type="submit" class="button-primary" value="Delete" id="radslide_delete-<?php echo($row->id); ?>" />
         <td>
         <td><?php radslide_helper_ajax_loader("radslide_loading-".$row->id); ?></td>
@@ -276,18 +280,23 @@ function radslide_ajax_populate() {
     ?>
     <tr><td colspan="6"><div style="background-color:#999999;height:1px;margin:8px 0;"></div></td></tr>
     <tr id="radslide_add_row">
-      <td><input type="text" id="radslide_add-title" value="Enter title" /></td>
+ 			<td style="text-align:center">
+				<input type="hidden" id="radslide_add-image_url" value="" />
+				<img src="" width="100" id="radslide_add-image" />
+			</td>
+     <td><input type="text" id="radslide_add-title" value="Enter title" /></td>
       <td><input type="text" id="radslide_add-description" value="Enter description" /></td>
-      <td><input type="text" id="radslide_add-image_url" value="http://" /></td>
       <td><input type="text" id="radslide_add-link_url" value="http://" /></td>
       <td><input type="text" style="width:3em;" id="radslide_add-sort" value="0" /></td>
       <td style="text-align:center;">
+				<input type="button" class="button-primary radslide_image_picker" id="radslide_image_picker-add" value="Choose Image" />
         <input type="submit" class="button-primary" value="Add Slide" id="radslide_add" />
         <input type="submit" class="button-primary" value="Update" id="radslide_update" />
       </td>
       <td><?php radslide_helper_ajax_loader("radslide_loading"); ?></td>
     </tr>
-  </table>
+	</table>
+	<script type="text/javascript">radslide_setup_image_pickers();</script>
   <?php
   exit();
 }
@@ -383,13 +392,28 @@ function radslide_head() {
   }
 }
 
+// media api scripts and styles
+function radslide_media_api_scripts() {
+	wp_enqueue_script('media-upload');
+	wp_enqueue_script('thickbox');
+	wp_register_script('my-upload', WP_PLUGIN_URL.'/radslide/image_selector.js', array('jquery','media-upload','thickbox'));
+	wp_enqueue_script('my-upload');
+}
+function radslide_media_api_styles() {
+	wp_enqueue_style('thickbox');
+}
+
 // hooks
 register_activation_hook(__FILE__, 'radslide_install');
 register_deactivation_hook(__FILE__, 'radslide_uninstall');
 add_action('wp_head', 'radslide_head');
 if(is_admin()) {
   add_action('admin_menu', 'radslide_create_menu');
-  add_action('admin_init', 'radslide_register_settings');
+	add_action('admin_init', 'radslide_register_settings');
+
+	if(isset($_GET['page']) && $_GET['page'] == 'radslide_slideshow') {
+		add_action('admin_print_scripts', 'radslide_media_api_scripts');
+		add_action('admin_print_styles', 'radslide_media_api_styles');
+	}
 }
 
-?>
