@@ -18,11 +18,29 @@ function radslide_install() {
   add_option('radslide_enabled', 'true');
   add_option('radslide_disabled_html', '<div><h1>radSLIDE is disabled</h1></div>');
 
-  // set up the radslide mysql table
-  $table_name = radslide_helper_db_table_name();
-  if($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) {
-    $sql = "CREATE TABLE ".$table_name." (
-        id MEDIUMINT(9) NOT NULL AUTO_INCREMENT,
+  // set up the radslide mysql tables
+	require_once(ABSPATH.'wp-admin/includes/upgrade.php');
+
+	// add slideshow table
+  $slideshow_name = radslide_helper_db_slideshow();
+  if($wpdb->get_var("SHOW TABLES LIKE '$slideshow_name'") != $slideshow_name) {
+    $sql = "CREATE TABLE ".$slideshow_name." (
+				id MEDIUMINT(9) NOT NULL AUTO_INCREMENT,
+        name TEXT NOT NULL,
+        template TEXT NOT NULL,
+        cycle_options TEXT NOT NULL,
+        disable_text TEXT NOT NULL,
+        UNIQUE KEY id (id)
+      );";
+		dbDelta($sql);
+	}
+
+	// add slide table
+	$slide_name = radslide_helper_db_slide();
+  if($wpdb->get_var("SHOW TABLES LIKE '$slide_name'") != $slide_name) {
+    $sql = "CREATE TABLE ".$slide_name." (
+				id MEDIUMINT(9) NOT NULL AUTO_INCREMENT,
+				slideshow_id MEDIUMINT(0) NOT NULL,
         image_url TEXT NOT NULL,
         link_url TEXT NOT NULL,
         title TEXT NOT NULL,
@@ -30,10 +48,10 @@ function radslide_install() {
         sort TINYINT NOT NULL,
         UNIQUE KEY id (id)
       );";
-    require_once(ABSPATH.'wp-admin/includes/upgrade.php');
-    dbDelta($sql);
-    add_option('radslide_db_version', RADSLIDE_DB_VERSION);
+		dbDelta($sql);
   }
+
+  add_option('radslide_db_version', RADSLIDE_DB_VERSION);
 }
 
 // uninstall

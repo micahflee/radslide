@@ -10,8 +10,12 @@ function radslide_helper_ajax_loader($id) {
   echo '<img src="'.$image_url.'" id="'.$id.'" style="display:none" />';
 }
 
-function radslide_helper_db_table_name() {
-  return $wpdb->prefix.'radslide';
+function radslide_helper_db_slideshow() {
+  return $wpdb->prefix.'radslide_slideshow';
+}
+
+function radslide_helper_db_slide() {
+  return $wpdb->prefix.'radslide_slide';
 }
 
 // add jquery to head, if needed
