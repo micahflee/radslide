@@ -54,8 +54,11 @@ function radslide_uninstall() {
 
 // create menu
 function radslide_create_menu() {
-  add_menu_page('radSLIDE Slideshow', 'radSLIDE', 'administrator', 'radslide_slideshow', 'radslide_page_slideshow');
-  add_submenu_page('radslide_slideshow', 'radSLIDE Settings', 'Settings', 'administrator', 'radslide_settings', 'radslide_page_settings');
+	$menu_slug = 'radslide_slideshows';
+  add_menu_page('radSLIDE Slideshows', 'radSLIDE', 'administrator', $menu_slug, 'radslide_page_slideshow');
+  add_submenu_page($menu_slug, 'radSLIDE Slideshows', 'Slideshows', 'administrator', $menu_slug, 'radslide_page_slideshow');
+  add_submenu_page($menu_slug, 'radSLIDE Settings', 'Settings', 'administrator', 'radslide_settings', 'radslide_page_settings');
+  add_submenu_page($menu_slug, 'radSLIDE Uninstall', 'Uninstall', 'administrator', 'radslide_uninstall', 'radslide_page_uninstall');
 }
 
 // menu register settings
