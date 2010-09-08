@@ -6,10 +6,59 @@ function radslide_page_slideshow() {
   
   radslide_helper_include_jquery();
   ?>
-  <script type="text/javascript">
+	<script type="text/javascript">
+		// if there's an ajax error, alert it
     function radslide_ajax_error(response) {
       alert("radSLIDE ajax error:\n\n"+JSON.stringify(response));
-    }
+		}
+		
+		// add a new slideshow
+		function radslide_slideshow_add() {
+      $("#radslide_loading").show();
+			$.ajax({
+				url: "<?php echo(get_option('siteurl')); ?>/wp-admin/admin-ajax.php",
+				data: {
+					action: 'radslide_add_slideshow',
+					cookie: encodeURIComponent(document.cookie),
+					radslide_name: $("#radslide_add-name").val(),
+					radslide_template: $("#radslide_add-template").val(),
+					radslide_cycle_options: $("#radslide_add-cycle_options").val()
+				},
+				type: "POST",
+				success: radslide_populate_slideshows,
+				error: radslide_ajax_error
+			});
+		}
+
+		// fill in the page with a list of slideshows
+		function radslide_populate_slideshows() {
+      $.ajax({
+        url: "<?php echo(get_option('siteurl')); ?>/wp-admin/admin-ajax.php",
+        data: {
+          action: 'radslide_populate_slideshows',
+          cookie: encodeURIComponent(document.cookie)
+        },
+        type: "POST",
+				success: function(data) {
+					// have slideshow index, display it
+					$('#radslide').html(data);
+
+					// intercept button clicks
+          $(".button-primary").click(function(){
+						var id = $(this).attr('id');
+
+						// add slideshow button
+						if(id == 'radslide_add') {
+							radslide_slideshow_add();
+						}
+					});
+				},
+        error: radslide_ajax_error
+			});
+		}
+
+		function radslide_populate_slides() {
+		}
     
     function radslide_populate() {
       $.ajax({
@@ -114,14 +163,12 @@ function radslide_page_slideshow() {
     }
 
     $(document).ready(function() {
-      // populate the table of slides
-      radslide_populate();
+      // populate the table of slideshows
+      radslide_populate_slideshows();
     });
   </script>
 
-  <h2>Manage Slideshow</h2>
-  <div id="radslide_table">Loading slides...</div>
-	<pre id="test_data"></pre>
+  <div id="radslide">Loading...</div>
   <?php
 }
 

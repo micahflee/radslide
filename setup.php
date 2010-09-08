@@ -29,7 +29,6 @@ function radslide_install() {
         name TEXT NOT NULL,
         template TEXT NOT NULL,
         cycle_options TEXT NOT NULL,
-        disable_text TEXT NOT NULL,
         UNIQUE KEY id (id)
       );";
 		dbDelta($sql);

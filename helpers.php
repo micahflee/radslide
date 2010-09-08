@@ -11,10 +11,12 @@ function radslide_helper_ajax_loader($id) {
 }
 
 function radslide_helper_db_slideshow() {
+	global $wpdb;
   return $wpdb->prefix.'radslide_slideshow';
 }
 
 function radslide_helper_db_slide() {
+	global $wpdb;
   return $wpdb->prefix.'radslide_slide';
 }
 
