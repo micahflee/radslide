@@ -25,6 +25,14 @@ if(is_admin()) {
 		add_action('admin_print_scripts', 'radslide_media_api_scripts');
 		add_action('admin_print_styles', 'radslide_media_api_styles');
 	}
+
+	/*// load jquery
+  wp_deregister_script( 'jquery' );
+	wp_register_script( 'jquery', get_option('siteurl').'/wp-content/plugins/radslide/vendor/jquery-1.4.2.min.js');
+
+	// load bespin
+  wp_deregister_script( 'bespin' );
+	wp_register_script( 'bespin', get_option('siteurl').'/wp-content/plugins/radslide/vendor/bespin/BespinEmbedded.js');*/
 }
 
 

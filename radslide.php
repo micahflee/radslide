@@ -9,16 +9,22 @@
  * License: GPL2
  * */
 
-define('RADSLIDE_DB_VERSION', 1);
 require_once('display.php');
 require_once('helpers.php');
-require_once('ajax.php');
+
+// ajax responders
+require_once('ajax/slideshows.php');
+require_once('ajax/slides.php');
+
+// pages
 require_once('pages/slideshow.php');
 require_once('pages/settings.php');
 require_once('pages/uninstall.php');
+
 require_once('setup.php');
 
 // install radslide
+define('RADSLIDE_DB_VERSION', 1);
 function radslide_install() {
   global $wpdb;
 
