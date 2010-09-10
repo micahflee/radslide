@@ -15,6 +15,7 @@ require_once('helpers.php');
 // ajax responders
 require_once('ajax/slideshows.php');
 require_once('ajax/slides.php');
+require_once('ajax/uninstall.php');
 
 // pages
 require_once('pages/slideshow.php');
@@ -38,7 +39,6 @@ function radslide_install() {
   global $wpdb;
 
 	// set the initial options
-  add_option('radslide_inc_jquery', 'true');
   add_option('radslide_db_version', RADSLIDE_DB_VERSION);
 
 	// add slideshow table
@@ -76,7 +76,6 @@ function radslide_uninstall() {
   global $wpdb;
 
   // delete the options
-  delete_option('radslide_inc_jquery');
   delete_option('radslide_db_version');
 
   // delete the table
