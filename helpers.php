@@ -32,18 +32,11 @@ function radslide_helper_db_slide() {
 // add jquery to head, if needed
 function radslide_head() {
   if(get_option('radslide_enabled') == 'true') {
-    if(get_option('radslide_inc_jquery') == 'true') {
-      radslide_helper_include_jquery();
-    }
-    $jquery_cycle_url = get_option('siteurl').'/wp-content/plugins/radslide/vendor/jquery.cycle.lite.min.js';
-    ?>
-    <script type="text/javascript" src="<?php echo($jquery_cycle_url); ?>"></script>
-    <script type="text/javascript">
-    $(document).ready(function(){
-      $("#radslide").cycle(<?php echo(get_option('radslide_cycle_options')); ?>);
-    });
-    </script>
-    <?php
+?>
+<script type="text/javascript">
+$(document).ready(function(){ $("#radslide").cycle(<?php echo(get_option('radslide_cycle_options')); ?>); });
+</script>
+<?php
   }
 }
 
