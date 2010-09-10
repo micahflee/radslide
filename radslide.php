@@ -23,6 +23,16 @@ require_once('pages/uninstall.php');
 
 require_once('setup.php');
 
+// activate radslide
+function radslide_activate() {
+	radslide_install();
+}
+
+// deactive radslide
+function radslide_deactivate() {
+	// do nothing for now, we don't delete the data until it's manually uninstalled
+}
+
 // install radslide
 define('RADSLIDE_DB_VERSION', 1);
 function radslide_install() {
@@ -75,6 +85,6 @@ function radslide_uninstall() {
 	$wpdb->query("DROP TABLE IF EXISTS ".radslide_helper_db_slide());
 }
 
-register_activation_hook(__FILE__, 'radslide_install');
-register_deactivation_hook(__FILE__, 'radslide_uninstall');
+register_activation_hook(__FILE__, 'radslide_activate');
+register_deactivation_hook(__FILE__, 'radslide_deactivate');
 
