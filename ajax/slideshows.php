@@ -58,7 +58,10 @@ function radslide_ajax_slideshows_populate() {
 			<td><textarea style="width:500px;height:100px;" id="radslide_add-cycle_options"><?php echo($default_cycle_options); ?></textarea></td>
 		</tr>
 	</table>
-	<p class="submit"><input type="submit" class="button-primary" id="radslide_add" value="<?php _e('Add Slideshow') ?>" /> <span id="radslide_loading"></span></p>
+	<p class="submit">
+		<input type="submit" class="button-primary" id="radslide_add" value="<?php _e('Add Slideshow') ?>" />
+		<?php radslide_helper_ajax_loader("radslide_loading"); ?>
+	</p>
 	<?php
 	exit();
 }
@@ -77,7 +80,44 @@ function radslide_ajax_slideshows_add() {
 
 // edit a slideshow's settings
 function radslide_ajax_slideshows_settings() {
+	global $wpdb;
+	$slideshow_row = $wpdb->get_row("SELECT * FROM ".radslide_helper_db_slideshow()." WHERE id=".(int)($_POST['radslide_slideshow_id']));
+	?>
+	<input type="hidden" id="radslide_slideshow_id" value="<?php echo($slideshow_row->id); ?>" />
+	<h2>Slideshow Settings: <?php echo($slideshow_row->name); ?></h2>
+	<input type="button" id="radslide_back_to_slideshows" class="button-primary" value="Back to Slideshows" style="margin-bottom:10px;" />
+	<?php radslide_helper_ajax_loader("radslide_back_to_slideshows_loading"); ?>
+	<table>
+		<tr>
+			<td>Name</td>
+			<td><input type="text" id="radslide-name" value="<?php echo(stripslashes($slideshow_row->name)); ?>" /></td>
+		</tr>
+		<tr>
+			<td style="width:120px;">Template<br/><span style="font-size:.8em; font-style:italic;">Note: Use [[TITLE]], [[DESCRIPTION]], [[LINK_URL]], [[IMAGE_URL]]</span></th>
+			<td><textarea style="width:650px;height:150px;" id="radslide-template"><?php echo(stripslashes($slideshow_row->template)); ?></textarea></td>
+		</tr>
+		<tr>
+			<td>jQuery Cycle Options</td>
+			<td><textarea style="width:500px;height:100px;" id="radslide-cycle_options"><?php echo(stripslashes($slideshow_row->cycle_options)); ?></textarea></td>
+		</tr>
+	</table>
+	<p class="submit">
+		<input type="submit" class="button-primary" id="radslide_edit" value="<?php _e('Edit Slideshow') ?>" />
+		<?php radslide_helper_ajax_loader("radslide_loading"); ?>
+	</p>
+	<?php
+  exit();
+}
+
+// update a slideshow's settings
+function radslide_ajax_slideshows_settings_edit() {
   global $wpdb;
+  $row = array(
+    'name' => $_POST['radslide_name'],
+    'template' => $_POST['radslide_template'],
+    'cycle_options' => $_POST['radslide_cycle_options'],
+  );
+  $wpdb->update(radslide_helper_db_slideshow(), $row, array('id'=>(int)($_POST['radslide_slideshow_id'])));
   exit();
 }
 
@@ -93,6 +133,7 @@ function radslide_ajax_slideshows_delete() {
 add_action('wp_ajax_radslide_slideshows_populate', 'radslide_ajax_slideshows_populate');
 add_action('wp_ajax_radslide_slideshows_add', 'radslide_ajax_slideshows_add');
 add_action('wp_ajax_radslide_slideshows_settings', 'radslide_ajax_slideshows_settings');
+add_action('wp_ajax_radslide_slideshows_settings_edit', 'radslide_ajax_slideshows_settings_edit');
 add_action('wp_ajax_radslide_slideshows_delete', 'radslide_ajax_slideshows_delete');
 
 ?>

@@ -25,15 +25,21 @@ if(is_admin()) {
 		add_action('admin_print_scripts', 'radslide_media_api_scripts');
 		add_action('admin_print_styles', 'radslide_media_api_styles');
 	}
-
-	/*// load jquery
-  wp_deregister_script( 'jquery' );
-	wp_register_script( 'jquery', get_option('siteurl').'/wp-content/plugins/radslide/vendor/jquery-1.4.2.min.js');
-
-	// load bespin
-  wp_deregister_script( 'bespin' );
-	wp_register_script( 'bespin', get_option('siteurl').'/wp-content/plugins/radslide/vendor/bespin/BespinEmbedded.js');*/
 }
 
+// enqueue stuff
+function radslide_admin_scripts() {
+	wp_enqueue_script('media-upload');
+	wp_enqueue_script('thickbox');
+	wp_register_script('image-picker', get_option('siteurl').'/wp-content/plugins/radslide/js/image_picker.js"', array('jquery','media-upload','thickbox'));
+	wp_enqueue_script('image-picker');
+}
+function radslide_admin_styles() {
+	wp_enqueue_style('thickbox');
+}
+if(isset($_GET['page']) && $_GET['page'] == 'radslide_slideshows') {
+	add_action('admin_print_scripts', 'radslide_admin_scripts');
+	add_action('admin_print_styles', 'radslide_admin_styles');
+}
 
 ?>

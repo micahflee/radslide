@@ -1,6 +1,5 @@
 // add a new slideshow
 function radslide_slideshows_add() {
-	$("#radslide_loading").show();
 	$.ajax({
 		url: siteurl+"/wp-admin/admin-ajax.php",
 		data: {
@@ -29,7 +28,50 @@ function radslide_slideshows_settings(id) {
 		type: "POST",
 		success: function(data) {
 			$("#radslide").html(data);
+			
+			// make the template textarea use bespin
+			var bespin_editor;
+			bespin.useBespin(document.getElementById("radslide-template"), {
+				"syntax": "html"
+			}).then(function(env){
+				bespin_editor = env.editor; 
+			});
+
+			// intercept button clicks
+			$(".button-primary").click(function(){
+				var id = $(this).attr('id');
+
+				// back to slideshow button
+				if(id == 'radslide_back_to_slideshows') {
+					$('#radslide_back_to_slideshows_loading').show();
+					radslide_slideshows_populate();
+				}
+				// edit slideshow button
+				else if(id == 'radslide_edit') {
+					$('#radslide-template').html(bespin_editor.value);
+					$('#radslide_loading').show();
+					radslide_slideshows_settings_edit();
+				}
+			});
 		},
+		error: radslide_ajax_error
+	});
+}
+
+// actually update the slideshow settings
+function radslide_slideshows_settings_edit() {
+	$.ajax({
+		url: siteurl+"/wp-admin/admin-ajax.php",
+		data: {
+			action: 'radslide_slideshows_settings_edit',
+			cookie: encodeURIComponent(document.cookie),
+			radslide_slideshow_id: $("#radslide_slideshow_id").val(),
+			radslide_name: $("#radslide-name").val(),
+			radslide_template: $("#radslide-template").val(),
+			radslide_cycle_options: $("#radslide-cycle_options").val()
+		},
+		type: "POST",
+		success: radslide_slideshows_populate,
 		error: radslide_ajax_error
 	});
 }
@@ -64,8 +106,12 @@ function radslide_slideshows_populate() {
 			$('#radslide').html(data);
 
 			// make the template textarea use bespin
-			var node = document.getElementById("radslide_add-template");
-			bespin.useBespin(node, { "stealFocus": true, "syntax": "html" });
+			var bespin_editor;
+			bespin.useBespin(document.getElementById("radslide_add-template"), {
+				"syntax": "html"
+			}).then(function(env){
+				bespin_editor = env.editor; 
+			});
 
 			// intercept button clicks
 			$(".button-primary").click(function(){
@@ -73,6 +119,8 @@ function radslide_slideshows_populate() {
 
 				// add slideshow button
 				if(id == 'radslide_add') {
+					$('#radslide_add-template').html(bespin_editor.value);
+					$("#radslide_loading").show();
 					radslide_slideshows_add();
 				}
 				// either manage, settings, or delete
