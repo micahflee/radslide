@@ -43,25 +43,27 @@ function radslide_ajax_slideshows_populate() {
 
 	<hr/>
 
-	<h2>New Slideshow</h2>
-	<table>
-		<tr>
-			<td>Name</td>
-			<td><input type="text" id="radslide_add-name" value="" /></td>
-		</tr>
-		<tr>
-			<td style="width:120px;">Template<br/><span style="font-size:.8em; font-style:italic;">Note: Use [[TITLE]], [[DESCRIPTION]], [[LINK_URL]], [[IMAGE_URL]]</span></th>
-			<td><textarea style="width:650px;height:150px;" id="radslide_add-template"><?php echo($default_template); ?></textarea></td>
-		</tr>
-		<tr>
-			<td>jQuery Cycle Options</td>
-			<td><textarea style="width:500px;height:100px;" id="radslide_add-cycle_options"><?php echo($default_cycle_options); ?></textarea></td>
-		</tr>
-	</table>
-	<p class="submit">
-		<input type="submit" class="button-primary" id="radslide_add" value="<?php _e('Add Slideshow') ?>" />
-		<?php radslide_helper_ajax_loader("radslide_loading"); ?>
-	</p>
+	<h2 id="radslide_add_toggle">New Slideshow <strong>&darr;</strong></h2>
+	<div id="radslide_add_form" style="visibility:hidden">
+		<table>
+			<tr>
+				<td>Name</td>
+				<td><input type="text" id="radslide_add-name" value="" /></td>
+			</tr>
+			<tr>
+				<td style="width:120px;">Template<br/><span style="font-size:.8em; font-style:italic;">Note: Use [[TITLE]], [[DESCRIPTION]], [[LINK_URL]], [[IMAGE_URL]]</span></th>
+				<td><textarea style="width:650px;height:150px;" id="radslide_add-template"><?php echo($default_template); ?></textarea></td>
+			</tr>
+			<tr>
+				<td>jQuery Cycle Options</td>
+				<td><textarea style="width:500px;height:100px;" id="radslide_add-cycle_options"><?php echo($default_cycle_options); ?></textarea></td>
+			</tr>
+		</table>
+		<p class="submit">
+			<input type="submit" class="button-primary" id="radslide_add" value="<?php _e('Add Slideshow') ?>" />
+			<?php radslide_helper_ajax_loader("radslide_loading"); ?>
+		</p>
+	</div>
 	<?php
 	exit();
 }

@@ -1,3 +1,14 @@
+// toggle the add slideshow form
+function radslide_add_toggle_setup() {
+	$('#radslide_add_form').hide();
+	$('#radslide_add_form').css('visibility', 'visible');
+	$('#radslide_add_toggle').toggle(function(){
+		$('#radslide_add_form').show();
+	}, function(){
+		$('#radslide_add_form').hide();
+	});
+};
+
 // add a new slideshow
 function radslide_slideshows_add() {
 	$.ajax({
@@ -111,6 +122,8 @@ function radslide_slideshows_populate() {
 				"syntax": "html"
 			}).then(function(env){
 				bespin_editor = env.editor; 
+				// set up the add form's toggler
+				radslide_add_toggle_setup();
 			});
 
 			// intercept button clicks
