@@ -16,6 +16,8 @@ function radslide_ajax_slideshows_populate() {
 	<h2>Slideshows</h2>
 	<table>
 		<tr>
+			<th>ID</th>
+			<th style="width:20px;"></th>
 			<th>Name</th>
 			<th style="width:20px;"></th>
 			<th>Action</th>
@@ -27,6 +29,8 @@ function radslide_ajax_slideshows_populate() {
     foreach($rows as $row) {
 			?>
 			<tr>
+				<td><?php echo($row->id); ?></td>
+				<td></td>
 				<td><?php echo($row->name); ?></td>
 				<td></td>
 				<td>
