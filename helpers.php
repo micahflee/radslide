@@ -31,13 +31,14 @@ function radslide_helper_db_slide() {
 
 // add jquery to head, if needed
 function radslide_head() {
-  if(get_option('radslide_enabled') == 'true') {
-?>
-<script type="text/javascript">
-$(document).ready(function(){ $("#radslide").cycle(<?php echo(get_option('radslide_cycle_options')); ?>); });
-</script>
-<?php
-  }
+	global $wpdb;
+	?><script type="text/javascript">$(function(){<?php
+	$table_name = radslide_helper_db_slideshow();
+	$slideshow_rows = $wpdb->get_results("SELECT * FROM $table_name");
+	foreach($slideshow_rows as $slideshow_row) {
+		?>$("#radslide-<?php echo($slideshow_row->id) ?>").cycle(<?php echo(stripslashes($slideshow_row->cycle_options)); ?>); <?php
+	}
+	?>});</script>	<?php
 }
 
 // media api scripts and styles

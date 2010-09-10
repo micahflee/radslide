@@ -7,10 +7,7 @@ function radslide_ajax_slideshows_populate() {
 	$default_template = '<a href="[[LINK_URL]]"><img src="[[IMAGE_URL]]" alt="[[TITLE]]" /></a>
 <h3><a href="[[LINK_URL]]">[[TITLE]]</a></h3>
 <div class="blurb">[[DESCRIPTION]]</div>';
-	$default_cycle_options = '{
-  delay:2000,
-  speed:500
-}';
+	$default_cycle_options = '{ delay:2000, speed:500 }';
 	
 	?>
 	<h2>Slideshows</h2>
