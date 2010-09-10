@@ -33,10 +33,12 @@ function radslide_scripts() {
 // hooks
 add_action('wp_head', 'radslide_head');
 add_action('wp_print_scripts', 'radslide_scripts');
+
 if(is_admin()) {
   add_action('admin_menu', 'radslide_create_menu');
 	add_action('admin_init', 'radslide_register_settings');
-
+	
+	// admin enqueues
 	if(isset($_GET['page']) && $_GET['page'] == 'radslide_slideshows') {
 		add_action('admin_print_scripts', 'radslide_admin_scripts');
 		add_action('admin_print_styles', 'radslide_admin_styles');
