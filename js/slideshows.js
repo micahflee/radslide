@@ -1,24 +1,24 @@
 // toggle the add slideshow form
 function radslide_add_toggle_setup() {
-	$('#radslide_add_form').hide();
-	$('#radslide_add_form').css('visibility', 'visible');
-	$('#radslide_add_toggle').toggle(function(){
-		$('#radslide_add_form').show();
+	jQuery('#radslide_add_form').hide();
+	jQuery('#radslide_add_form').css('visibility', 'visible');
+	jQuery('#radslide_add_toggle').toggle(function(){
+		jQuery('#radslide_add_form').show();
 	}, function(){
-		$('#radslide_add_form').hide();
+		jQuery('#radslide_add_form').hide();
 	});
 };
 
 // add a new slideshow
 function radslide_slideshows_add() {
-	$.ajax({
+	jQuery.ajax({
 		url: siteurl+"/wp-admin/admin-ajax.php",
 		data: {
 			action: 'radslide_slideshows_add',
 			cookie: encodeURIComponent(document.cookie),
-			radslide_name: $("#radslide_add-name").val(),
-			radslide_template: $("#radslide_add-template").val(),
-			radslide_cycle_options: $("#radslide_add-cycle_options").val()
+			radslide_name: jQuery("#radslide_add-name").val(),
+			radslide_template: jQuery("#radslide_add-template").val(),
+			radslide_cycle_options: jQuery("#radslide_add-cycle_options").val()
 		},
 		type: "POST",
 		success: radslide_slideshows_populate,
@@ -28,8 +28,8 @@ function radslide_slideshows_add() {
 
 // slideshow settings
 function radslide_slideshows_settings(id) {
-	$("#radslide_loading").show();
-	$.ajax({
+	jQuery("#radslide_loading").show();
+	jQuery.ajax({
 		url: siteurl+"/wp-admin/admin-ajax.php",
 		data: {
 			action: 'radslide_slideshows_settings',
@@ -38,7 +38,7 @@ function radslide_slideshows_settings(id) {
 		},
 		type: "POST",
 		success: function(data) {
-			$("#radslide").html(data);
+			jQuery("#radslide").html(data);
 			
 			// make the template textarea use bespin
 			var bespin_editor;
@@ -49,18 +49,18 @@ function radslide_slideshows_settings(id) {
 			});
 
 			// intercept button clicks
-			$(".button-primary").click(function(){
-				var id = $(this).attr('id');
+			jQuery(".button-primary").click(function(){
+				var id = jQuery(this).attr('id');
 
 				// back to slideshow button
 				if(id == 'radslide_back_to_slideshows') {
-					$('#radslide_back_to_slideshows_loading').show();
+					jQuery('#radslide_back_to_slideshows_loading').show();
 					radslide_slideshows_populate();
 				}
 				// edit slideshow button
 				else if(id == 'radslide_edit') {
-					$('#radslide-template').html(bespin_editor.value);
-					$('#radslide_loading').show();
+					jQuery('#radslide-template').html(bespin_editor.value);
+					jQuery('#radslide_loading').show();
 					radslide_slideshows_settings_edit();
 				}
 			});
@@ -71,15 +71,15 @@ function radslide_slideshows_settings(id) {
 
 // actually update the slideshow settings
 function radslide_slideshows_settings_edit() {
-	$.ajax({
+	jQuery.ajax({
 		url: siteurl+"/wp-admin/admin-ajax.php",
 		data: {
 			action: 'radslide_slideshows_settings_edit',
 			cookie: encodeURIComponent(document.cookie),
-			radslide_slideshow_id: $("#radslide_slideshow_id").val(),
-			radslide_name: $("#radslide-name").val(),
-			radslide_template: $("#radslide-template").val(),
-			radslide_cycle_options: $("#radslide-cycle_options").val()
+			radslide_slideshow_id: jQuery("#radslide_slideshow_id").val(),
+			radslide_name: jQuery("#radslide-name").val(),
+			radslide_template: jQuery("#radslide-template").val(),
+			radslide_cycle_options: jQuery("#radslide-cycle_options").val()
 		},
 		type: "POST",
 		success: radslide_slideshows_populate,
@@ -89,8 +89,8 @@ function radslide_slideshows_settings_edit() {
 
 // slideshow delete
 function radslide_slideshows_delete(id) {
-	$("#radslide_loading").show();
-	$.ajax({
+	jQuery("#radslide_loading").show();
+	jQuery.ajax({
 		url: siteurl+"/wp-admin/admin-ajax.php",
 		data: {
 			action: 'radslide_slideshows_delete',
@@ -105,7 +105,7 @@ function radslide_slideshows_delete(id) {
 
 // fill in the page with a list of slideshows
 function radslide_slideshows_populate() {
-	$.ajax({
+	jQuery.ajax({
 		url: siteurl+"/wp-admin/admin-ajax.php",
 		data: {
 			action: 'radslide_slideshows_populate',
@@ -114,7 +114,7 @@ function radslide_slideshows_populate() {
 		type: "POST",
 		success: function(data) {
 			// have slideshow index, display it
-			$('#radslide').html(data);
+			jQuery('#radslide').html(data);
 
 			// make the template textarea use bespin
 			var bespin_editor;
@@ -127,13 +127,13 @@ function radslide_slideshows_populate() {
 			});
 
 			// intercept button clicks
-			$(".button-primary").click(function(){
-				var id = $(this).attr('id');
+			jQuery(".button-primary").click(function(){
+				var id = jQuery(this).attr('id');
 
 				// add slideshow button
 				if(id == 'radslide_add') {
-					$('#radslide_add-template').html(bespin_editor.value);
-					$("#radslide_loading").show();
+					jQuery('#radslide_add-template').html(bespin_editor.value);
+					jQuery("#radslide_loading").show();
 					radslide_slideshows_add();
 				}
 				// either manage, settings, or delete
@@ -141,7 +141,7 @@ function radslide_slideshows_populate() {
 					var parts = id.split('-');
 					id = parts[0];
 					var row_id = parts[1];
-					$("#radslide_loading-"+row_id).show();
+					jQuery("#radslide_loading-"+row_id).show();
 
 					if(id == 'radslide_manage') { radslide_slides_populate(row_id); }
 					else if(id == 'radslide_settings') { radslide_slideshows_settings(row_id); }

@@ -1,10 +1,5 @@
 <?php
 
-function radslide_helper_include_jquery() {
-  $jquery_url = get_option('siteurl').'/wp-content/plugins/radslide/vendor/jquery-1.4.2.min.js';
-  echo '<script type="text/javascript" src="'.$jquery_url.'"></script>';
-}
-
 function radslide_helper_include_bespin() {
 	$bespin_base = get_option('siteurl').'/wp-content/plugins/radslide/vendor/bespin';
 	$css_url = get_option('siteurl').'/wp-content/plugins/radslide/vendor/bespin/BespinEmbedded.css';
@@ -32,11 +27,11 @@ function radslide_helper_db_slide() {
 // add jquery to head, if needed
 function radslide_head() {
 	global $wpdb;
-	?><script type="text/javascript">$(function(){<?php
+	?><script type="text/javascript">jQuery(function(){<?php
 	$table_name = radslide_helper_db_slideshow();
 	$slideshow_rows = $wpdb->get_results("SELECT * FROM $table_name");
 	foreach($slideshow_rows as $slideshow_row) {
-		?>$("#radslide-<?php echo($slideshow_row->id) ?>").cycle(<?php echo(stripslashes($slideshow_row->cycle_options)); ?>); <?php
+		?>jQuery("#radslide-<?php echo($slideshow_row->id) ?>").cycle(<?php echo(stripslashes($slideshow_row->cycle_options)); ?>); <?php
 	}
 	?>});</script>	<?php
 }

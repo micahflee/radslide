@@ -1,7 +1,7 @@
-$(function(){
-	$('#radslide_uninstall').click(function(){
-		$('#radslide_loading').show();
-		$.ajax({
+jQuery(function(){
+	jQuery('#radslide_uninstall').click(function(){
+		jQuery('#radslide_loading').show();
+		jQuery.ajax({
 			url: siteurl+"/wp-admin/admin-ajax.php",
 			data: {
 				action: 'radslide_uninstall',
@@ -9,7 +9,7 @@ $(function(){
 			},
 			type: "POST",
 			success: function(data){
-				$('#radslide_uninstall_container').html(data);
+				jQuery('#radslide_uninstall_container').html(data);
 			}
 		});
 	});

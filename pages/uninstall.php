@@ -2,7 +2,6 @@
 
 // uninstall page
 function radslide_page_uninstall() {
-	radslide_helper_include_jquery();
 	?>
 	<script type="text/javascript"> siteurl = '<?php echo(get_option('siteurl')); ?>'; </script>
 	<script src="<?php echo(get_option('siteurl')); ?>/wp-content/plugins/radslide/js/uninstall.js" type="text/javascript"></script>

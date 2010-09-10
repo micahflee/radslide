@@ -2,7 +2,6 @@
 
 // slideshow page
 function radslide_page_slideshow() {
-	radslide_helper_include_jquery();
 	radslide_helper_include_bespin();
 	?>
 	<script type="text/javascript">
@@ -18,7 +17,7 @@ function radslide_page_slideshow() {
 	<script src="<?php echo(get_option('siteurl')); ?>/wp-content/plugins/radslide/js/slides.js" type="text/javascript"></script>
 	<script src="<?php echo(get_option('siteurl')); ?>/wp-content/plugins/radslide/js/image_picker.js" type="text/javascript"></script>
 	<script type="text/javascript">
-    $(document).ready(function() {
+    jQuery(function() {
       // populate the table of slideshows
       radslide_slideshows_populate();
     });
