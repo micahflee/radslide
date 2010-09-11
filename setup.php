@@ -5,6 +5,7 @@ function radslide_create_menu() {
 	$menu_slug = 'radslide_slideshows';
   add_menu_page('radSLIDE Slideshows', 'radSLIDE', 'administrator', $menu_slug, 'radslide_page_slideshow');
   add_submenu_page($menu_slug, 'radSLIDE Slideshows', 'Slideshows', 'administrator', $menu_slug, 'radslide_page_slideshow');
+  add_submenu_page($menu_slug, 'radSLIDE Help', 'Help', 'administrator', 'radslide_help', 'radslide_page_help');
   add_submenu_page($menu_slug, 'radSLIDE Uninstall', 'Uninstall', 'administrator', 'radslide_uninstall', 'radslide_page_uninstall');
 }
 

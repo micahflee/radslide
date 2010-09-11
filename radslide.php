@@ -19,6 +19,7 @@ require_once('ajax/uninstall.php');
 
 // pages
 require_once('pages/slideshow.php');
+require_once('pages/help.php');
 require_once('pages/uninstall.php');
 
 require_once('setup.php');
