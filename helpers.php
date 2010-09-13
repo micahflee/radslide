@@ -47,4 +47,8 @@ function radslide_media_api_styles() {
 	wp_enqueue_style('thickbox');
 }
 
+function radslide_rd_credit() {
+	?><div style="text-align:center;margin:50px 0;"><a href="http://www.radicaldesigns.org/"><img src="<?php echo(get_option('siteurl')); ?>/wp-content/plugins/radslide/images/radical_designs.png" title="Radical Designs" alt="Radical Designs" style="vertical-align:middle" /></a></div><?php
+}
+
 ?>

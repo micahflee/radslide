@@ -13,6 +13,7 @@ function radslide_page_uninstall() {
 	<?php radslide_helper_ajax_loader("radslide_loading"); ?>
 	</div>
 	<?php
+	radslide_rd_credit();
 }
 
 

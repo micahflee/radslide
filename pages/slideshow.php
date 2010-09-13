@@ -25,6 +25,7 @@ function radslide_page_slideshow() {
 
   <div id="radslide">Loading...</div>
   <?php
+	radslide_rd_credit();
 }
 
 
