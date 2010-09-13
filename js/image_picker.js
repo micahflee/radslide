@@ -13,8 +13,8 @@ function  radslide_setup_image_pickers() {
 			image_id = '#radslide_add-image';
 			image_url_id = '#radslide_add-image_url';
 		} else {
-			image_id = '#radslide_update-image_url-'+row_id;
-			image_url_id = '#radslide_update-image-'+row_id;
+			image_id = '#radslide_update-image-'+row_id;
+			image_url_id = '#radslide_update-image_url-'+row_id;
 		}
 
 		imgurl = jQuery('img',html).attr('src');
