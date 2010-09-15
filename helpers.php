@@ -48,7 +48,7 @@ function radslide_media_api_styles() {
 }
 
 function radslide_rd_credit() {
-	?><div style="text-align:center;margin:50px 0;"><a href="http://www.radicaldesigns.org/"><img src="<?php echo(get_option('siteurl')); ?>/wp-content/plugins/radslide/images/radical_designs.png" title="Radical Designs" alt="Radical Designs" style="vertical-align:middle" /></a></div><?php
+	?><p style="margin-top:100px">&copy; radSLIDE is developed and maintained by <a href="http://github.com/micahflee/" target="_blank">Micah Lee</a> at <a href="http://radicaldesigns.org/" target="_blank">Radical Designs</a> and is happily released under the <a href="http://www.gnu.org/licenses/gpl-2.0.html" target="_blank">GLP2 License</a>.</p><?php
 }
 
 ?>

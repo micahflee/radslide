@@ -56,11 +56,11 @@ function radslide_ajax_slides_populate() {
       <td style="text-align:center;">
 				<input type="button" class="button-primary radslide_image_picker" id="radslide_image_picker-add" value="Choose Image" />
         <input type="button" class="button-primary" value="Add Slide" id="radslide_add" />
-        <input type="button" class="button-primary" value="Update" id="radslide_update" />
       </td>
       <td><?php radslide_helper_ajax_loader("radslide_loading"); ?></td>
     </tr>
 	</table>
+  <p><input type="button" class="button-primary" value="Save Changes" id="radslide_update" /></p>
 	<script type="text/javascript">radslide_setup_image_pickers();</script>
   <?php
   exit();

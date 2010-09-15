@@ -7,7 +7,7 @@ function radslide_ajax_slideshows_populate() {
 	$default_template = '<a href="[[LINK_URL]]"><img src="[[IMAGE_URL]]" alt="[[TITLE]]" /></a>
 <h3><a href="[[LINK_URL]]">[[TITLE]]</a></h3>
 <div class="blurb">[[DESCRIPTION]]</div>';
-	$default_cycle_options = '{ delay:2000, speed:500 }';
+	$default_cycle_options = '{ timeout:2000, speed:500 }';
 	
 	?>
 	<h2>Slideshows</h2>
@@ -44,7 +44,7 @@ function radslide_ajax_slideshows_populate() {
 
 	<hr/>
 
-	<h2 id="radslide_add_toggle">New Slideshow <strong>&darr;</strong></h2>
+	<h2 id="radslide_add_toggle">New Slideshow <input type="button" class="button-primary" value="+" style="vertical-align:middle" /></h2>
 	<div id="radslide_add_form" style="visibility:hidden">
 		<table>
 			<tr>
@@ -56,7 +56,7 @@ function radslide_ajax_slideshows_populate() {
 				<td><textarea style="width:650px;height:150px;" id="radslide_add-template"><?php echo($default_template); ?></textarea></td>
 			</tr>
 			<tr>
-				<td>jQuery Cycle Options</td>
+				<td><a href="http://jquery.malsup.com/cycle/options.html" target="_blank">jQuery Cycle Options</a></td>
 				<td><textarea style="width:500px;height:100px;" id="radslide_add-cycle_options"><?php echo($default_cycle_options); ?></textarea></td>
 			</tr>
 		</table>
@@ -100,7 +100,7 @@ function radslide_ajax_slideshows_settings() {
 			<td><textarea style="width:650px;height:150px;" id="radslide-template"><?php echo(stripslashes($slideshow_row->template)); ?></textarea></td>
 		</tr>
 		<tr>
-			<td>jQuery Cycle Options</td>
+			<td><a href="http://jquery.malsup.com/cycle/options.html" target="_blank">jQuery Cycle Options</a></td>
 			<td><textarea style="width:500px;height:100px;" id="radslide-cycle_options"><?php echo(stripslashes($slideshow_row->cycle_options)); ?></textarea></td>
 		</tr>
 	</table>
