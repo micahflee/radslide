@@ -1,5 +1,5 @@
 === radSLIDE ===
-Contributors: radicaldesigns (this should be a list of wordpress.org userid's)
+Contributors: radicaldesigns
 Donate link: http://radicaldesigns.org/
 Tags: slideshow, jquery cycle
 Requires at least: 3.0
@@ -19,11 +19,16 @@ Setup and customization of the display may require a knowledge of HTML and CSS. 
 == Installation ==
 
 To install and configure:
-* Put all files in wp-content/plugins/radslide/
-* In wordpress admin plugins page, activate radSLIDE plugin
-* In the wordpress admin menu, click Slideshows in the radSLIDE menu
-* Create new slideshows and add images to them
-* Add [[radslide 1]] in your page or post, replacing 1 with the id of your slideshow
+
+Put all files in wp-content/plugins/radslide/
+
+In wordpress admin plugins page, activate radSLIDE plugin
+
+In the wordpress admin menu, click Slideshows in the radSLIDE menu
+
+Create new slideshows and add images to them
+
+Add [[radslide 1]] in your page or post, replacing 1 with the id of your slideshow
 
 == Screenshots ==
 
