@@ -1,14 +1,5 @@
 <?php
 
-/*function radslide_helper_include_bespin() {
-	$bespin_base = get_option('siteurl').'/wp-content/plugins/radslide/vendor/bespin';
-	$css_url = get_option('siteurl').'/wp-content/plugins/radslide/vendor/bespin/BespinEmbedded.css';
-	$js_url = get_option('siteurl').'/wp-content/plugins/radslide/vendor/bespin/BespinEmbedded.js';
-	echo '<link id="bespin_base" href="'.$bespin_base.'">';
-	echo '<link rel="stylesheet" type="text/css" href="'.$css_url.'">';
-	echo '<script type="text/javascript" src="'.$js_url.'"></script>';
-}*/
-
 function radslide_helper_ajax_loader($id) {
   $image_url = get_option('siteurl').'/wp-content/plugins/radslide/images/ajax-loader.gif';
   echo '<img src="'.$image_url.'" id="'.$id.'" style="display:none" />';

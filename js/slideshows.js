@@ -3,10 +3,8 @@ function radslide_add_toggle_setup() {
 	jQuery('#radslide_add_form').hide();
 	jQuery('#radslide_add_form').css('visibility', 'visible');
 	jQuery('#radslide_add_toggle').toggle(function(){
-		console.log('show!');
 		jQuery('#radslide_add_form').show();
 	}, function(){
-		console.log('hide!');
 		jQuery('#radslide_add_form').hide();
 	});
 };
