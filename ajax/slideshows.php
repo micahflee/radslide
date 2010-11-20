@@ -18,6 +18,10 @@ function radslide_ajax_slideshows_populate() {
 			<th>Name</th>
 			<th style="width:20px;"></th>
 			<th>Action</th>
+			<th style="width:20px;"></th>
+			<th>Embed Code</th>
+			<th style="width:20px;"></th>
+			<th>PHP Theme Code</th>
 			<td></td>
 		</tr>
     <?php
@@ -35,6 +39,10 @@ function radslide_ajax_slideshows_populate() {
 					<input type="button" class="button-primary" id="radslide_settings-<?php echo($row->id); ?>" value="Settings" />
 					<input type="button" class="button-primary" id="radslide_delete-<?php echo($row->id); ?>" value="Delete" />
 				</td>
+				<td></td>
+				<td style="font-family:courier; font-size:11px;"> [[radslide <?php echo($row->id); ?>]] </td>
+				<td></td>
+				<td style="font-family:courier; font-size:11px;"> &lt;?php radslide(<?php echo($row->id); ?>); ?&gt; </td>
         <td><?php radslide_helper_ajax_loader("radslide_loading-".$row->id); ?></td>
 			</tr>
 			<?php
@@ -52,7 +60,7 @@ function radslide_ajax_slideshows_populate() {
 				<td><input type="text" id="radslide_add-name" value="" /></td>
 			</tr>
 			<tr>
-				<td style="width:120px;">Template<br/><span style="font-size:.8em; font-style:italic;">Note: Use [[TITLE]], [[DESCRIPTION]], [[LINK_URL]], [[IMAGE_URL]]</span></th>
+				<td style="width:120px;">Template<br/><span style="font-size:.8em; font-style:italic;">Note: Use [[TITLE]], [[DESCRIPTION]], [[LINK_URL]], [[IMAGE_URL]], [[ID]] (the ID of the current slide)</span></th>
 				<td><textarea style="width:650px;height:150px;" id="radslide_add-template"><?php echo($default_template); ?></textarea></td>
 			</tr>
 			<tr>
@@ -96,7 +104,7 @@ function radslide_ajax_slideshows_settings() {
 			<td><input type="text" id="radslide-name" value="<?php echo(stripslashes($slideshow_row->name)); ?>" /></td>
 		</tr>
 		<tr>
-			<td style="width:120px;">Template<br/><span style="font-size:.8em; font-style:italic;">Note: Use [[TITLE]], [[DESCRIPTION]], [[LINK_URL]], [[IMAGE_URL]]</span></th>
+			<td style="width:120px;">Template<br/><span style="font-size:.8em; font-style:italic;">Note: Use [[TITLE]], [[DESCRIPTION]], [[LINK_URL]], [[IMAGE_URL]], [[ID]] (the ID of the current slide)</span></th>
 			<td><textarea style="width:650px;height:150px;" id="radslide-template"><?php echo(stripslashes($slideshow_row->template)); ?></textarea></td>
 		</tr>
 		<tr>

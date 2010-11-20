@@ -17,7 +17,7 @@ function radslide_page_help() {
 
 	<h3>Inserting slideshows into pages or posts</h3>
 	<p>After you've set up a slideshow, go to the <a href="admin.php?page=radslide_slideshows">Slideshows</a> page and look for the ID number of the slideshow you want to add (let's pretend it's 3). To insert that slideshow put this where you want it to appear in your page or post:</p>
-	<pre>[[radslide 3]]</pre>
+	<p>[[radslide 3]]</p>
 	<p>Change 3 to the ID of the slideshow you want to use.</p>
 
 	<h3>Inserting slideshows into a Wordpress theme</h3>
