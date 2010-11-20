@@ -2,7 +2,7 @@
 
 // slideshow page
 function radslide_page_slideshow() {
-	radslide_helper_include_bespin();
+	//radslide_helper_include_bespin();
 	?>
 	<script type="text/javascript">
 		// if there's an ajax error, alert it
