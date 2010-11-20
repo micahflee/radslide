@@ -60,7 +60,7 @@ function radslide_ajax_slideshows_populate() {
 				<td><input type="text" id="radslide_add-name" value="" /></td>
 			</tr>
 			<tr>
-				<td style="width:120px;">Template<br/><span style="font-size:.8em; font-style:italic;">Note: Use [[TITLE]], [[DESCRIPTION]], [[LINK_URL]], [[IMAGE_URL]], [[ID]] (the ID of the current slide)</span></th>
+				<td style="width:120px;">Template<br/><span style="font-size:.8em; font-style:italic;">Note: Use [[TITLE]], [[DESCRIPTION]], [[LINK_URL]], [[IMAGE_URL]], [[SLIDE_ID]]</span></th>
 				<td><textarea style="width:650px;height:150px;" id="radslide_add-template"><?php echo($default_template); ?></textarea></td>
 			</tr>
 			<tr>
@@ -104,7 +104,7 @@ function radslide_ajax_slideshows_settings() {
 			<td><input type="text" id="radslide-name" value="<?php echo(stripslashes($slideshow_row->name)); ?>" /></td>
 		</tr>
 		<tr>
-			<td style="width:120px;">Template<br/><span style="font-size:.8em; font-style:italic;">Note: Use [[TITLE]], [[DESCRIPTION]], [[LINK_URL]], [[IMAGE_URL]], [[ID]] (the ID of the current slide)</span></th>
+			<td style="width:120px;">Template<br/><span style="font-size:.8em; font-style:italic;">Note: Use [[TITLE]], [[DESCRIPTION]], [[LINK_URL]], [[IMAGE_URL]], [[SLIDE_ID]]</span></th>
 			<td><textarea style="width:650px;height:150px;" id="radslide-template"><?php echo(stripslashes($slideshow_row->template)); ?></textarea></td>
 		</tr>
 		<tr>
