@@ -4,7 +4,7 @@ Donate link: http://radicaldesigns.org/
 Tags: slideshow, jquery cycle
 Requires at least: 3.0
 Tested up to: 3.0.1
-Stable tag: 1.0
+Stable tag: 1.0.1
 
 A javascript slideshow plugin that supports multiple slideshows and uses jQuery Cycle.
 
@@ -35,6 +35,11 @@ Add [[radslide 1]] in your page or post, replacing 1 with the id of your slidesh
 1. Managing a slideshow
 
 == Changelog ==
+
+= 1.0.1 =
+* Made the HTML editor better
+* Includes full jQuery Cycle instead of jQuery Cycle Lite
+* Slideshows list displays embed code
 
 = 1.0 =
 * In the beginning...
